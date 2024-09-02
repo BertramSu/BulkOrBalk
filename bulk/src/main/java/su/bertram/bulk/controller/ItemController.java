@@ -45,4 +45,61 @@ public class ItemController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/items/{id}")
+    public ResponseEntity<Item> getItemById(@PathVariable("id") long id){
+        Optional<Item> itemData = itemRepository.findById(id);
+
+        if (itemData.isPresent())
+            return new ResponseEntity<>(itemData.get(), HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/item")
+    public ResponseEntity<Item> createItem(@RequestBody Item item){
+        try {
+            Item _item = itemRepository.save(new Item(item.getName(), item.isBalk(), item.getPurchaseDate()));
+            return new ResponseEntity<>(_item, HttpStatus.CREATED);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("item/{id}")
+    public ResponseEntity<Item> updateItem(@PathVariable("id") long id, @RequestBody Item item){
+        Optional<Item> itemData = itemRepository.findById(id);
+
+        if (itemData.isPresent()){
+            Item _item = itemData.get();
+            _item.setBalk(item.isBalk());
+            _item.setName(item.getName());
+            _item.setPurchaseDate(item.getPurchaseDate());
+            return new ResponseEntity<>(itemRepository.save(_item), HttpStatus.OK);
+        }else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/item")
+    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
+        try {
+            itemRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/items/isBalk")
+    public ResponseEntity<List<Item>> findByIsBalk(){
+        try{
+            List<Item> items = itemRepository.findByIsBalk(true);
+
+            if (items.isEmpty())
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(items, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

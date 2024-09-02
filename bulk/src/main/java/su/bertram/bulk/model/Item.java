@@ -13,10 +13,10 @@ public class Item {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "isBalk")
+    @Column(name = "isbalk")
     private boolean isBalk;
 
-    @Column(name = "purchase_Date")
+    @Column(name = "purchase_date")
     private LocalDateTime purchaseDate;
 
     public Item(String name, boolean isBalk, LocalDateTime purchaseDate) {
@@ -24,6 +24,10 @@ public class Item {
         this.isBalk = isBalk;
         this.purchaseDate = purchaseDate;
     }
+
+    public Item() {
+    }
+
 
     public long getId() {
         return id;
