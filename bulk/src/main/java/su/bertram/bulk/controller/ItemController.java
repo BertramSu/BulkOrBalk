@@ -80,7 +80,7 @@ public class ItemController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("/item")
+    @DeleteMapping("/item/{id}")
     public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
         try {
             itemRepository.deleteById(id);
