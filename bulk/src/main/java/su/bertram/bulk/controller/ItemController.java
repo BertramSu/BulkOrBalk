@@ -46,7 +46,7 @@ public class ItemController {
         }
     }
 
-    @GetMapping("/items/{id}")
+    @GetMapping("/item/{id}")
     public ResponseEntity<Item> getItemById(@PathVariable("id") long id){
         Optional<Item> itemData = itemRepository.findById(id);
 
