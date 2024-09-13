@@ -39,7 +39,7 @@ const ItemList = () => {
   const itemList = groups.map(group => {
     return <tr key={group.id}>
       <td style={{whiteSpace: 'nowrap'}}>{group.name}</td>
-      <td>{group.isBulk ? "true" : "false"}</td>
+      <td>{group.balk ? "true" : "false"}</td>
       <td>{group.purchaseDate}</td>
       <td>
         <ButtonGroup>
