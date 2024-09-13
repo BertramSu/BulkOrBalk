@@ -1,11 +1,11 @@
 package su.bertram.bulk.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import su.bertram.bulk.model.Item;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface ItemRepository extends JpaRepository<Item, Long> {
+public interface ItemRepository extends MongoRepository<Item, String> {
     List<Item> findByIsBalk(boolean balk);
 
     List<Item> findByNameContaining(String name);

@@ -1,22 +1,16 @@
 package su.bertram.bulk.model;
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "item")
+@Document(collection = "item")
 public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
-    @Column(name = "name")
     private String name;
-
-    @Column(name = "isbalk")
     private boolean isBalk;
-
-    @Column(name = "purchase_date")
     private LocalDateTime purchaseDate;
 
     public Item(String name, boolean isBalk, LocalDateTime purchaseDate) {
@@ -29,11 +23,11 @@ public class Item {
     }
 
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
